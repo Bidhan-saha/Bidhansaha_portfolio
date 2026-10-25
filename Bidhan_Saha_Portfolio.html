@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bidhan Saha | AI/ML Researcher</title>
+<meta name="description" content="Bidhan Saha is a Computer Science undergraduate and AI/ML researcher at AIUB working on deep learning, computer vision and medical image analysis.">
+<meta name="theme-color" content="#F9FAFC">
+<script>
+  /* Set the theme before first paint so the page never flashes the wrong theme. */
+  (function () {
+    var theme = "light";
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark" || saved === "light") theme = saved;
+      else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+    } catch (e) {
+      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+    }
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<style>
+  :root {
+    --bg: #F9FAFC;
+    --surface: #FFFFFF;
+    --fg: #111A2A;
+    --muted: #54637A;
+    --line: #DEE4EC;
+    --accent: #2447B8;
+    --accent-soft: #E8EEFC;
+    --on-accent: #FFFFFF;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0C121C;
+    --surface: #132029;
+    --fg: #E6ECF3;
+    --muted: #98A6B8;
+    --line: #263342;
+    --accent: #8FA8FF;
+    --accent-soft: #192642;
+    --on-accent: #0C121C;
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  ul, ol, dl, dd { margin: 0; padding: 0; }
+  ul, ol { list-style: none; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  ::selection { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+  [hidden] { display: none !important; }
+
+  .i { width: 1.1rem; height: 1.1rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .wrap { width: 100%; max-width: 64rem; margin: 0 auto; padding-inline: max(1.25rem, env(safe-area-inset-left)) max(1.25rem, env(safe-area-inset-right)); }
+  @media (min-width: 640px) { .wrap { padding-inline: 2rem; } }
+
+  .skip { position: absolute; left: -999px; top: 1rem; background: var(--accent); color: var(--on-accent); padding: .5rem 1rem; border-radius: 6px; z-index: 100; }
+  .skip:focus { left: 1rem; }
+
+  /* Buttons and chips */
+  .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .625rem 1rem; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--fg); font: 500 .875rem/1.25rem var(--sans); text-decoration: none; cursor: pointer; transition: color .15s, border-color .15s, opacity .15s; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { color: var(--on-accent); opacity: .9; }
+  .chip { display: inline-flex; align-items: center; padding: .25rem .625rem; border: 1px solid var(--line); border-radius: 4px; font-size: .875rem; line-height: 1.4; }
+  .chip.soft { background: var(--accent-soft); }
+  .chip.surface { background: var(--surface); }
+  .chip.xs { font-size: .75rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+  /* Navbar */
+  .topbar { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .topbar-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 4rem; }
+  .brand { font: 600 1.125rem/1 var(--serif); letter-spacing: -.01em; text-decoration: none; }
+  .nav { display: none; align-items: center; gap: 1.25rem; }
+  .nav a { font-size: .875rem; color: var(--muted); text-decoration: none; transition: color .15s; }
+  .nav a:hover, .nav a[aria-current="true"] { color: var(--accent); }
+  .nav a[aria-current="true"] { font-weight: 500; }
+  .tools { display: flex; align-items: center; gap: .5rem; }
+  .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border: 1px solid var(--line); border-radius: 6px; background: transparent; color: var(--fg); cursor: pointer; transition: color .15s, border-color .15s; }
+  .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .icon-btn .i { width: 1.25rem; height: 1.25rem; }
+  .icon-sun { display: none; }
+  :root[data-theme="dark"] .icon-sun { display: block; }
+  :root[data-theme="dark"] .icon-moon { display: none; }
+  .menu-close { display: none; }
+  .menu-open .menu-close { display: block; }
+  .menu-open .menu-burger { display: none; }
+  .mobile-nav { border-top: 1px solid var(--line); background: var(--bg); }
+  .mobile-nav ul { display: flex; flex-direction: column; padding-block: .5rem; }
+  .mobile-nav a { display: block; padding: .75rem 0; text-decoration: none; }
+  .mobile-nav a[aria-current="true"] { color: var(--accent); font-weight: 500; }
+  @media (min-width: 1024px) {
+    .nav { display: flex; }
+    .menu-toggle, .mobile-nav { display: none !important; }
+  }
+
+  /* Hero */
+  .hero { padding-block: 3.5rem; }
+  .hero-inner { max-width: 48rem; animation: rise .6s ease-out both; }
+  .hero .aff { color: var(--muted); }
+  .hero h1 { margin-top: 1rem; font: 600 clamp(3rem, 11vw, 4.5rem)/1.05 var(--serif); letter-spacing: -.02em; }
+  .hero .title { margin-top: 1.25rem; font-size: 1.125rem; font-weight: 500; }
+  .hero .bio { margin-top: 1.5rem; max-width: 42rem; color: var(--muted); font-size: 1.05rem; }
+  .hero .actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: .75rem; }
+  .hero .interests { margin-top: 2.5rem; }
+  .hero .interests h2 { font: 600 1rem/1.5 var(--sans); margin-bottom: .75rem; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (min-width: 640px) { .hero { padding-block: 6rem; } .hero .title { font-size: 1.25rem; } }
+
+  /* Sections */
+  .section { border-top: 1px solid var(--line); padding-block: 3.5rem; }
+  .section-grid { display: grid; gap: 1.5rem; }
+  .section h2.sec-title { font: 600 1.5rem/1.2 var(--serif); letter-spacing: -.01em; align-self: start; }
+  .section-body { min-width: 0; }
+  @media (min-width: 640px) { .section { padding-block: 5rem; } .section h2.sec-title { font-size: 1.875rem; } }
+  @media (min-width: 768px) {
+    .section-grid { grid-template-columns: 12rem minmax(0, 1fr); gap: 3rem; }
+    .section h2.sec-title { position: sticky; top: 6rem; }
+  }
+
+  .about { max-width: 42rem; display: flex; flex-direction: column; gap: 1.25rem; line-height: 1.8; font-size: 1.05rem; }
+
+  /* Timeline */
+  .timeline { margin-left: .375rem; border-left: 1px solid var(--line); }
+  .timeline li { position: relative; padding: 0 0 2.5rem 1.75rem; }
+  .timeline li:last-child { padding-bottom: 0; }
+  .timeline li::before { content: ""; position: absolute; left: -6px; top: .5rem; width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--accent); background: var(--bg); }
+  .when { font-size: .875rem; color: var(--muted); }
+  .item-title { margin-top: .25rem; font: 600 1.25rem/1.35 var(--serif); }
+  .item-sub { margin-top: .25rem; }
+  .muted { color: var(--muted); }
+
+  .points { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; max-width: 42rem; }
+  .points strong { display: block; font-weight: 600; }
+  .points span { display: block; margin-top: .25rem; color: var(--muted); }
+  .subhead { margin-top: 2rem; font: 600 1rem/1.5 var(--sans); }
+  .subhead + .chips { margin-top: .75rem; }
+
+  /* Publications */
+  .pubs { display: flex; flex-direction: column; gap: 1rem; counter-reset: pub; }
+  .pub { display: flex; gap: 1rem; padding: 1.25rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  .pub .num { flex-shrink: 0; font: 600 1.125rem/1.5 var(--serif); color: var(--accent); }
+  .pub p { line-height: 1.65; }
+  .pub .meta { margin-top: .75rem; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; font-size: .875rem; }
+  .pill { display: inline-block; padding: .125rem .625rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; font-size: .8rem; }
+
+  /* Projects */
+  .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+  .filter { padding: .375rem 1rem; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font: 400 .875rem/1.4 var(--sans); cursor: pointer; transition: color .15s, border-color .15s, background .15s; }
+  .filter:hover { border-color: var(--accent); color: var(--accent); }
+  .filter[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .projects { display: grid; gap: 1.25rem; }
+  @media (min-width: 768px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .project { display: flex; flex-direction: column; height: 100%; padding: 1.5rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); transition: transform .2s, border-color .2s, box-shadow .2s; animation: pop .25s ease-out both; }
+  .project:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 6px 18px rgb(0 0 0 / .08); }
+  .project .top { display: flex; align-items: center; justify-content: space-between; gap: .75rem; font-size: .875rem; }
+  .project .top .pill { flex-shrink: 0; font-size: .75rem; }
+  .project h3 { margin-top: .75rem; font: 600 1.25rem/1.35 var(--serif); }
+  .project p { margin-top: .5rem; color: var(--muted); }
+  .project .chips { margin-top: 1rem; }
+  .project .link { margin-top: auto; padding-top: 1.25rem; }
+  .project .link a { display: inline-flex; align-items: center; gap: .5rem; color: var(--accent); font-size: .875rem; font-weight: 500; text-decoration: none; }
+  .project .link a:hover { text-decoration: underline; }
+  @keyframes pop { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
+
+  /* Skills */
+  .skills > div { display: grid; gap: .5rem; padding-block: 1rem; border-top: 1px solid var(--line); }
+  .skills > div:last-child { border-bottom: 1px solid var(--line); }
+  .skills dt { font-weight: 600; }
+  @media (min-width: 640px) { .skills > div { grid-template-columns: 13rem minmax(0, 1fr); gap: 1.5rem; } }
+
+  /* Interests */
+  .interest-list { display: grid; gap: 1.5rem 2.5rem; }
+  @media (min-width: 640px) { .interest-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .interest-list li { display: flex; align-items: flex-start; gap: 1rem; }
+  .interest-list .ico { display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; flex-shrink: 0; margin-top: .125rem; border-radius: 6px; background: var(--accent-soft); color: var(--accent); }
+  .interest-list .ico .i { width: 1.25rem; height: 1.25rem; }
+  .interest-list span.t { font: 600 1.125rem/1.35 var(--serif); }
+
+  /* Contact */
+  .lead { max-width: 36rem; font-size: 1.05rem; }
+  .contact-list { margin-top: 1.5rem; border-block: 1px solid var(--line); }
+  .contact-list li { display: flex; align-items: flex-start; gap: 1rem; padding-block: 1rem; }
+  .contact-list li + li { border-top: 1px solid var(--line); }
+  .contact-list .i { margin-top: .25rem; width: 1.25rem; height: 1.25rem; color: var(--accent); }
+  .contact-list .label { font-size: .875rem; color: var(--muted); }
+  .contact-list .val { font-weight: 500; overflow-wrap: anywhere; text-decoration: none; }
+  .contact-list a.val:hover { color: var(--accent); text-decoration: underline; }
+  .contact-list div { min-width: 0; }
+  #contact .btn { margin-top: 2rem; }
+
+  footer { border-top: 1px solid var(--line); padding-block: 2rem; font-size: .875rem; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></symbol>
+    <symbol id="i-microscope" viewBox="0 0 24 24"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></symbol>
+    <symbol id="i-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M13 8H7"/><path d="M17 12H7"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar" id="topbar">
+  <div class="wrap topbar-row">
+    <a class="brand" href="#home">Bidhan Saha</a>
+    <nav class="nav" aria-label="Primary" id="nav">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#interests">Interests</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch between light and dark theme">
+        <svg class="i icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="i icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <button class="icon-btn menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="i menu-burger" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="i menu-close" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" hidden>
+    <ul class="wrap">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="home" aria-labelledby="home-title">
+    <div class="wrap">
+      <div class="hero-inner">
+        <p class="aff">Department of CSE, American International University-Bangladesh (AIUB)</p>
+        <h1 id="home-title">Bidhan Saha</h1>
+        <p class="title">AI/ML Researcher | Deep Learning | Computer Vision | Software Developer</p>
+        <p class="bio">Computer Science undergraduate and AI/ML researcher at AIUB. I develop and optimize YOLO-based deep learning models for computer vision and medical imaging, including pneumonia detection and lumbar spine level detection.</p>
+        <div class="actions">
+          <a class="btn btn-primary js-cv" href="#" download="Bidhan_Saha_CV.pdf"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg>Download CV</a>
+          <a class="btn" href="#contact"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Contact me</a>
+          <a class="btn" href="https://github.com/Bidhan-saha" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/bidhan-saha-770732234" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+        </div>
+        <div class="interests">
+          <h2>Research interests</h2>
+          <ul class="chips">
+            <li class="chip surface">Artificial Intelligence and Deep Learning</li>
+            <li class="chip surface">Computer Vision and Medical Image Analysis</li>
+            <li class="chip surface">YOLO Architecture Optimization</li>
+            <li class="chip surface">Autonomous AI Agents</li>
+            <li class="chip surface">Large Language Models (LLMs)</li>
+            <li class="chip surface">Model Context Protocol (MCP)</li>
+            <li class="chip surface">Embedded Systems and IoT</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="wrap section-grid">
+      <h2 class="sec-title" id="about-title">About me</h2>
+      <div class="section-body about">
+        <p>I am a Computer Science and Engineering undergraduate at AIUB and an AI/ML researcher with hands-on experience in deep learning, computer vision and medical imaging. I develop and optimize YOLO frameworks, ResNet architectures and Vision Transformers (ViT) for real-time object detection and classification, including medical diagnostic models for pneumonia and lumbar spine level detection.</p>
+        <p>I collaborate with senior AIUB faculty members on research across deep learning, human-computer interaction (HCI) and the Internet of Things (IoT). My work covers end-to-end dataset pipelines, mathematical modeling and model evaluation, and I write research papers for peer-reviewed international journals and IEEE/Springer conferences.</p>
+        <p>My goal is to build scalable, intelligent and human-centered AI systems for real-world applications.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education" aria-labelledby="education-title">
+    <div class="wrap section-grid">
+      <h2 class="sec-title" id="education-title">Education</h2>
+      <div class="section-body">
+        <ol class="timeline">
+          <li>
+            <p class="when">2022 &ndash; Present</p>
+            <h3 class="item-title">Bachelor of Science in Computer Science and Engineering</h3>
+            <p class="item-sub">American International University-Bangladesh (AIUB), Dhaka</p>
+          </li>
+          <li>
+            <p class="when">2018 &ndash; 2020</p>
+            <h3 class="item-title">Higher Secondary Certificate (HSC)</h3>
+            <p class="item-sub">Govt. Syed Hatem Ali College, Barishal</p>
+            <p class="item-sub muted">Major: Science</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="research" aria-labelledby="research-title">
+    <div class="wrap section-grid">
+      <h2 class="sec-title" id="research-title">Research experience</h2>
+      <div class="section-body">
+        <p class="when">2025 &ndash; Present</p>
+        <h3 class="item-title">Conducting Research Targeting Publication</h3>
+        <p class="item-sub">Department of Computer Science, AIUB</p>
+        <ul class="points">
+          <li><strong>Collaborative academic research</strong><span>Conducting research in Deep Learning, Computer Vision, Medical Imaging, HCI, and IoT under the supervision of Prof. Dr. Dip Nandi, Dr. Muhammad Firoz Mridha, Aminun Nahar, and Dr. Mousumi Bala.</span></li>
+          <li><strong>AI and medical imaging innovations</strong><span>Developing and improving YOLO models (YOLOv11) for medical detection tasks, such as pneumonia and lumbar spine level identification, using lightweight layers and attention mechanisms.</span></li>
+          <li><strong>End-to-end research contribution</strong><span>Working on complete research workflows, from literature reviews and dataset creation to model design, performance analysis, and manuscript writing for international journals and IEEE/Springer conferences.</span></li>
+        </ul>
+        <h4 class="subhead">Areas of specialization</h4>
+        <ul class="chips">
+          <li class="chip soft">Deep Learning</li>
+          <li class="chip soft">Computer Vision</li>
+          <li class="chip soft">Medical Imaging</li>
+          <li class="chip soft">Human-Computer Interaction (HCI)</li>
+          <li class="chip soft">Internet of Things (IoT)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="publications" aria-labelledby="publications-title">
+    <div class="wrap section-grid">
+      <h2 class="sec-title" id="publications-title">Publications</h2>
+      <div class="section-body">
+        <ol class="pubs">
+          <li>
+            <article class="pub">
+              <span class="num" aria-hidden="true">[1]</span>
+              <div>
+                <p><span style="font-weight:500">&ldquo;An Enhanced YOLOv11 Framework for Automatic Lumbar Spine Level Detection,&rdquo;</span> in <em>Proceedings of the 28th International Conference on Computer and Information Technology (ICCIT)</em>, IEEE, Cox&rsquo;s Bazar, Bangladesh, Dec. 2025.</p>
+                <div class="meta"><span class="pill">Conference paper</span><span class="muted">2025</span></div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="pub">
+              <span class="num" aria-hidden="true">[2]</span>
+              <div>
+                <p><span style="font-weight:500">&ldquo;An Enhanced YOLOv11 Framework for Automatic Pneumonia Detection,&rdquo;</span> in <em>Proceedings of the International Conference on Electrical, Computer and Communication Technologies (ECCT)</em>, Dhaka, Bangladesh, May 2026.</p>
+                <div class="meta"><span class="pill">Conference paper</span><span class="muted">2026</span></div>
+              </div>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects" aria-labelledby="projects-title">
+    <div class="wrap section-grid">
+      <h2 class="sec-title" id="projects-title">Projects</h2>
+      <div class="section-body">
+        <div class="filters" role="group" aria-label="Filter projects by category">
+          <button class="filter" type="button" data-filter="All" aria-pressed="true">All (5)</button>
+          <button class="filter" type="button" data-filter="Research" aria-pressed="false">Research (3)</button>
+          <button class="filter" type="button" data-filter="Development" aria-pressed="false">Development (2)</button>
+        </div>
+        <ul class="projects" id="project-list">
+          <li class="project" data-category="Research">
+            <div class="top"><span class="muted">Machine learning for health data</span><span class="pill">Research</span></div>
+            <h3>Mental Health Risk Assessment</h3>
+            <p>A machine learning and exploratory data analysis pipeline in R for mental health risk assessment, using classification, regression and clustering algorithms.</p>
+            <ul class="chips" aria-label="Technologies used"><li class="chip xs">R</li><li class="chip xs">Classification</li><li class="chip xs">Regression</li><li class="chip xs">Clustering</li><li class="chip xs">EDA</li></ul>
+            <div class="link"><a href="https://github.com/Bidhan-saha" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg>View on GitHub</a></div>
+          </li>
+          <li class="project" data-category="Research">
+            <div class="top"><span class="muted">Machine learning for health data</span><span class="pill">Research</span></div>
+            <h3>Stroke Risk Prediction</h3>
+            <p>A data preprocessing, exploratory analysis and feature selection pipeline in R for predicting stroke risk.</p>
+            <ul class="chips" aria-label="Technologies used"><li class="chip xs">R</li><li class="chip xs">Data Preprocessing</li><li class="chip xs">EDA</li><li class="chip xs">Feature Selection</li></ul>
+            <div class="link"><a href="https://github.com/Bidhan-saha" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg>View on GitHub</a></div>
+          </li>
+          <li class="project" data-category="Development">
+            <div class="top"><span class="muted">Full-stack web application</span><span class="pill">Development</span></div>
+            <h3>Hospital Bed Management and Patient Admission System</h3>
+            <p>A full-stack system for managing hospital beds and patient admissions, running on a web server.</p>
+            <ul class="chips" aria-label="Technologies used"><li class="chip xs">PHP</li><li class="chip xs">MySQL</li><li class="chip xs">HTML</li><li class="chip xs">CSS</li></ul>
+            <div class="link"><a href="https://github.com/Bidhan-saha" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg>View on GitHub</a></div>
+          </li>
+          <li class="project" data-category="Development">
+            <div class="top"><span class="muted">Embedded systems and IoT</span><span class="pill">Development</span></div>
+            <h3>Gait and Motion Tracking Dashboard</h3>
+            <p>A real-time web dashboard connected to an ESP32 microcontroller that shows live gait and motion tracking telemetry.</p>
+            <ul class="chips" aria-label="Technologies used"><li class="chip xs">HTML</li><li class="chip xs">CSS</li><li class="chip xs">JavaScript</li><li class="chip xs">ESP32</li></ul>
+            <div class="link"><a href="https://github.com/Bidhan-saha" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg>View on GitHub</a></div>
+          </li>
+          <li class="project" data-category="Research">
+            <div class="top"><span class="muted">Neural network analysis</span><span class="pill">Research</span></div>
+            <h3>Fruit Fly Brain Visualization</h3>
+            <p>A real-time, web-based interactive visualization of the fruit fly brain, with a game modification dashboard for neural network analysis.</p>
+            <ul class="chips" aria-label="Technologies used"><li class="chip xs">HTML</li><li class="chip xs">JavaScript</li><li class="chip xs">Python Notebooks</li></ul>
+            <div class="link"><a href="https://github.com/Bidhan-saha" target="_blank" rel="noopener noreferrer"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg>View on GitHub</a></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills" aria-labelledby="skills-title">
+    <div class="wrap section-grid">
+      <h2 class="sec-title" id="skills-title">Technical skills</h2>
+      <div class="section-body">
+        <dl class="skills">
+          <div><dt>Programming languages</dt><dd><ul class="chips"><li class="chip">Python</li><li class="chip">SQL</li><li class="chip">TypeScript</li><li class="chip">JavaScript</li></ul></dd></div>
+          <div><dt>Computer vision</dt><dd><ul class="chips"><li class="chip">YOLO (All Models)</li><li class="chip">YOLOv8</li><li class="chip">YOLOv11</li><li class="chip">ResNet</li><li class="chip">Vision Transformers (ViT)</li><li class="chip">CNNs</li><li class="chip">OpenCV</li><li class="chip">Object Detection</li><li class="chip">Image &amp; Video Processing</li></ul></dd></div>
+          <div><dt>Deep learning methods</dt><dd><ul class="chips"><li class="chip">Image Classification</li><li class="chip">Feature Extraction</li><li class="chip">Attention Mechanisms</li><li class="chip">Segmentation</li><li class="chip">Pose Estimation</li><li class="chip">Oriented Bounding Box</li><li class="chip">Semantic Indexing</li><li class="chip">Depth Detection / Estimation</li></ul></dd></div>
+          <div><dt>Machine learning</dt><dd><ul class="chips"><li class="chip">PyTorch</li><li class="chip">TensorFlow</li><li class="chip">Scikit-learn</li><li class="chip">XGBoost</li><li class="chip">Transformers</li><li class="chip">Deep Learning</li><li class="chip">Supervised &amp; Unsupervised Learning</li><li class="chip">Feature Engineering</li></ul></dd></div>
+          <div><dt>Generative AI &amp; LLMs</dt><dd><ul class="chips"><li class="chip">OpenAI</li><li class="chip">Gemini</li><li class="chip">Llama 3</li><li class="chip">Phi-3</li><li class="chip">Gemma</li><li class="chip">Prompt Engineering</li><li class="chip">Retrieval-Augmented Generation (RAG)</li><li class="chip">Embeddings</li><li class="chip">Fine-Tuning</li><li class="chip">AI Agents</li></ul></dd></div>
+          <div><dt>AI frameworks &amp; vector databases</dt><dd><ul class="chips"><li class="chip">LangChain</li><li class="chip">LangGraph</li><li class="chip">CrewAI</li><li class="chip">AutoGen</li><li class="chip">Hugging Face Transformers</li><li class="chip">Pinecone</li><li class="chip">ChromaDB</li><li class="chip">FAISS</li></ul></dd></div>
+          <div><dt>Backend &amp; databases</dt><dd><ul class="chips"><li class="chip">FastAPI</li><li class="chip">Flask</li><li class="chip">REST APIs</li><li class="chip">Authentication</li><li class="chip">System Design</li><li class="chip">PostgreSQL</li><li class="chip">MongoDB</li><li class="chip">Redis</li></ul></dd></div>
+          <div><dt>Cloud &amp; DevOps</dt><dd><ul class="chips"><li class="chip">AWS</li><li class="chip">Docker</li><li class="chip">Git</li><li class="chip">CI/CD</li><li class="chip">Uvicorn</li></ul></dd></div>
+          <div><dt>Data engineering &amp; preprocessing</dt><dd><ul class="chips"><li class="chip">Pandas</li><li class="chip">NumPy</li><li class="chip">ETL/ELT Pipelines</li><li class="chip">Data Processing</li><li class="chip">Medical Image Preprocessing</li><li class="chip">Data Cleansing</li></ul></dd></div>
+          <div><dt>Web development</dt><dd><ul class="chips"><li class="chip">Front-End Web Basics</li></ul></dd></div>
+          <div><dt>Domain specializations</dt><dd><ul class="chips"><li class="chip">Human-Computer Interaction (HCI)</li><li class="chip">Internet of Things (IoT)</li><li class="chip">Medical Image Analysis</li></ul></dd></div>
+          <div><dt>Other</dt><dd><ul class="chips"><li class="chip">API Integration</li><li class="chip">Automation Workflows</li><li class="chip">Secure AI Systems</li><li class="chip">ONNX Model Export</li></ul></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="interests" aria-labelledby="interests-title">
+    <div class="wrap section-grid">
+      <h2 class="sec-title" id="interests-title">Research interests</h2>
+      <div class="section-body">
+        <ul class="interest-list">
+          <li><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-brain"/></svg></span><span class="t">Artificial Intelligence and Deep Learning</span></li>
+          <li><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-microscope"/></svg></span><span class="t">Computer Vision and Medical Image Analysis</span></li>
+          <li><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-crosshair"/></svg></span><span class="t">YOLO Architecture Optimization</span></li>
+          <li><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-bot"/></svg></span><span class="t">Autonomous AI Agents</span></li>
+          <li><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-message"/></svg></span><span class="t">Large Language Models (LLMs)</span></li>
+          <li><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-plug"/></svg></span><span class="t">Model Context Protocol (MCP)</span></li>
+          <li><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-cpu"/></svg></span><span class="t">Embedded Systems and IoT</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="wrap section-grid">
+      <h2 class="sec-title" id="contact-title">Contact</h2>
+      <div class="section-body">
+        <p class="lead">Get in touch about research collaboration, assistantships or software roles.</p>
+        <ul class="contact-list">
+          <li><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg><div><p class="label">Email</p><a class="val" href="mailto:22-47153-1@student.aiub.edu">22-47153-1@student.aiub.edu</a></div></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><div><p class="label">Phone</p><a class="val" href="tel:+8801725269577">+8801725269577</a></div></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-github"/></svg><div><p class="label">GitHub</p><a class="val" href="https://github.com/Bidhan-saha" target="_blank" rel="noopener noreferrer">github.com/Bidhan-saha</a></div></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-linkedin"/></svg><div><p class="label">LinkedIn</p><a class="val" href="https://www.linkedin.com/in/bidhan-saha-770732234" target="_blank" rel="noopener noreferrer">linkedin.com/in/bidhan-saha-770732234</a></div></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><div><p class="label">Location</p><p class="val">Dhaka, Bangladesh</p></div></li>
+        </ul>
+        <a class="btn btn-primary js-cv" href="#" download="Bidhan_Saha_CV.pdf"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg>Download CV</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap"><p>&copy; <span id="year">2026</span> Bidhan Saha. Department of CSE, American International University-Bangladesh (AIUB).</p></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+
+  /* ---- Theme toggle ---- */
+  document.getElementById("theme-toggle").addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) { /* theme still changes for this visit */ }
+  });
+
+  /* ---- Mobile menu ---- */
+  var topbar = document.getElementById("topbar");
+  var toggle = document.getElementById("menu-toggle");
+  var mobileNav = document.getElementById("mobile-nav");
+  function setMenu(open) {
+    mobileNav.hidden = !open;
+    topbar.classList.toggle("menu-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  toggle.addEventListener("click", function () { setMenu(mobileNav.hidden); });
+  mobileNav.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+
+  /* ---- Highlight the section being read ---- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll("#nav a, #mobile-nav a"));
+  var sections = navLinks
+    .map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); })
+    .filter(function (el, i, arr) { return el && arr.indexOf(el) === i; });
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          var id = entries[i].target.id;
+          navLinks.forEach(function (a) {
+            if (a.getAttribute("href") === "#" + id) a.setAttribute("aria-current", "true");
+            else a.removeAttribute("aria-current");
+          });
+          break;
+        }
+      }
+    }, { rootMargin: "-30% 0px -60% 0px" });
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+
+  /* ---- Project filters ---- */
+  var filterButtons = document.querySelectorAll(".filter");
+  var projects = document.querySelectorAll("#project-list .project");
+  filterButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var value = btn.getAttribute("data-filter");
+      filterButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+      projects.forEach(function (p) {
+        p.hidden = !(value === "All" || p.getAttribute("data-category") === value);
+      });
+    });
+  });
+
+  /* ---- Download CV (PDF is embedded in this file) ---- */
+  var CV_BASE64 = "JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YxIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKMyAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMiAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjMgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago1IDAgb2JqCjw8Ci9Db250ZW50cyAxMCAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCA5IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Db250ZW50cyAxMSAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCA5IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAvUGFnZXMgOSAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0F1dGhvciAoQmlkaGFuIFNhaGEpIC9DcmVhdGlvbkRhdGUgKEQ6MjAyNjEwMjYwMDExMTYrMDYnMDAnKSAvQ3JlYXRvciAoXCh1bnNwZWNpZmllZFwpKSAvS2V5d29yZHMgKCkgL01vZERhdGUgKEQ6MjAyNjEwMjYwMDExMTYrMDYnMDAnKSAvUHJvZHVjZXIgKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIFwob3BlbnNvdXJjZVwpKSAKICAvU3ViamVjdCAoQWNhZGVtaWMgQ1YpIC9UaXRsZSAoQmlkaGFuIFNhaGEgLSBDdXJyaWN1bHVtIFZpdGFlKSAvVHJhcHBlZCAvRmFsc2UKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL0NvdW50IDIgL0tpZHMgWyA1IDAgUiA2IDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKMTAgMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMjYyMgo+PgpzdHJlYW0KR2IhI10+QkFMaClMX0BgcG4icGE/JypHOyJGNDEwOF4qRT1dRVpdWWYpKmZiJTxTWlpkazBOJTIqWk9jW3RHPSxgKFdMdC1FXDBnO0xkbEFTYVVbVFZBPVZzby9oYmJjRFBkWF8nW3AxbCd1Uzlubjw+PF9zLDszLVsnY0pnVUNASGdNdD0nR1pOUjlIWyQkLT5ISkQ3cS4vLzFdQFg9WGdAPilBTFpJRnRDWUckay8vWjlYNl1ObltGTDZWSkV0TCQtNjUtZTxtcURRY1ZaNS44cys/cjElIiRnQUBGc2FoXmheTDpZMmN0NG8pLFpSZzxVMj48a0MkcG1vb1MkcDxPVEVPM1lhSEZOWUQzMTBBUWdKJ25NYC8lV1Q/LCpFLDQjQUxpbjFPU2wlOmEvWCdhWCFFaU8lYVRMXSZsbCRpcG0qLVknM2snKE9YMjQoQHJmSEZBQEoxWVgvNVQ5K2A7MlVCR05MUTJyUnFrVW1IXy9zWEw5YyNdMSUrcjU0LFVqS1YjR0NLU1shOURFWGo9ZkN1XCNuNWooNSM+cGRQJ1hdcDIlaGw9Ryg/anMuay1lXS5NY11nLm5RdHAzaD5IMykncCxoNTotaFEvczErP25tZWkvMDxwWUdncyU2XW0/OlFeKFNOaSVuRmBnTVRlL0U9QCFqdE08JkpiOSJWJyFnLmdJQ3E2JmJmKm1mQk5mayE/bzpDRTo6IUYiQi9eOlgmVCM8ST1HbVhYXVhbYmk3Ty4+bDQ7KlA6Lmw0YGVFbCg2XytvXWlSbGRcIj5obS1eMnJVbGklVm5tYCs7ZG07SWNRRTMubis3PkRxKGNWR3BTP2UwPk5uXCRqPUY6MjNbKyY8TlU2cWdxPVtOKTQyaVpiLD1DWzhHbV0+IjhxQnNSLGRqbTVtcVhncEdlMVUxTzAmKls2T1pSIjxgcUJRVjcjcnEkPGFRNWFvMFpRUSExPUBhQU8lOjA0PS5zQVwlSlYjWXM1SjNhKSItI1xtVz9WcU5NZEs9MF1wQlJQUTpZQk1WLyZUPVlzOk81ZDNlLCFDM18kKD9EMl04RGcjQTEoZkV0cVhWKms9LmEuWT1qLnNkcTRLM2lraWpMaUU+bkUzcmBxbidHS2hxbCpmPm1dPVlANjc5VUFGMlBxNWYoPC5bJUMjaVRETl1taVBeLUhURT9LSzJmbGxuYjQ5KDs1NkkjKjJqWkpxdGolazQkNjhQcWhxMyIhUyZHNE9jQE5kX2VuYzc/WFpFIjtHV2okQj1WbGtwR0E3UzBpaCo5TlFMJUB1KjhmanFNT2VHPzFpZ0EwOUZ1Qy10OSo3O1M4XlIiY29OJz8oVWNuMFVfSig/QT8kIUpHXXBdYFlwRD09ZnBjPzg7NCJiS0xWLUE/Ky1DaztPbCtRWytPXVhLbEpgUG5lO0s1SjglcUZIZVpWQ3JvPnVqYkFlbjkuWmkqM19CdV5BRy87VzszQkMzL2c6cktTcVA/PkQ7cDc5TD0jSWwxOm4vTCVQI2xaJElVM0QiNjYtak1jP1JhVTZyYjxJW1NpV0o9N1wyNWtwZDpHbkNcXCJvSmFLNWksVWIsTFxNP1AmVSdvcys9OWM0SSZYLEI/TzZtNDU4RGhmTGdvbyhXOzJQZnAkazlwbk1pKDUkcExPM0EtQ20lOkQiNCVhUUlQXWF0NUxvUSlYLUYyNCY7JDNNRVFDbW5JZkpmQU1BblYxMSpNU29SND9GWzx1bklOLjxCPWFEWTdWK1xfXS4tNVM/aydQSjc6ZD5kbFlZZCFAcSwra2FJZ0EuXTBVb1JxRTJeJ0NVbFprMXFmSl4/aVNMK1tcWltcJCJdXGFjc3FgOlVUMWYxTGFtakNQcmAtZSI/X0UqNjEzV2pLQGF0akU0dUlQNVl0dFxmMHA/dGlFTlpiSzhlQy5FaFdfL0hMRitdaFdYTitaMykqMVxBbyRNLS5rZjBQTyI2QUVeS3BdWlt1RGwtQ2AtOCY/WSk/XWpqUClBJUt0JD81ck9uLSNnZlBOcydKNi9tRTpzZCVqSzI2czdSVm1NPj1bLFs6JU9iV19ycXJPK2Z1ITpLMkJvPUkqVEZ1VUI1RFsyVWNyOk9aSDN1VkU5TDUxOm09b09LSzokPkBQR1U1L3VjJWA/YFRkYzA1REViWVJCM1J1VWdOMGppZjh0RSloKXNBXDQ8XVZQMHFxQ29bSnNeZlxYckMyOnRPQ2I1LmJDY2pDbGNAYHUwY1ZwM2dFYigySmllXzxrdUFeVDY6QkQ3UkpYUGNRbjwiNDBhTmRCaCpDSFhqJmtfYypTc1lhVzIjTmhpbEJhJjUhIlBJL2kkJT4jdVc3T09FalRqTmQ9OylxLEFca21nciNkaEQmVSdsaFhAUlxuWT9TcCFnMysmc05BZylSNjFBc09MV0hUWTdCLjkha1ZcUUE+OFdlXUVvKzQ7XSpYaEknYCIhV3U6QEhfOnFcdT1CKVdNbzhWKWE5JlAtLDE4bk5tXj1wNFlPUS1EWFw9ZG5AWixKI11eJ1tUdU1scGRrWzYkRzJQTS5iRjVqXXJkSE9oWWdKKV1LcypWW05WRTNmZCMrYC46TzVKalFiMGFBWFJ1U2skZkI+MUYja0hMaUMzQHIsOCs7QDNNVz9aNk1hbz09MiE8Zj1udFxdM2hkbmRjIU04WVI9ZixhTVAobHAkUVE5VjJyXjs+Yyc1YldxRi1gN28+dDZwTDtpbSFMckQlL2ttRk1jVS0pWiEwcGBgMiheKzcsYCNQRjpadD9fcEw4aShAYVJaJUVkTlBlRVlWLU1iMzJcMDZPcFw8P0MwSlAjVkJRXzw9T0NKSnQ1WWI3IiwqV19WUCU8VzZpUEo2YGJYI3I8ITlZYixyKyRibHUuZy5eIlgmTGgkNHNgOzwwa3JSXyVARVVULmM/ODEwaWlhImQiNSRtTWJMSyQjMElGckdyOW1aXF5RQzsrOElabi0sLUdTM102X2RpO2R0PUJyQlhiIVQ6al4iTikmMmU6QCFbcTcyWEZZXzo3WCFxYlBPPkc6X2VpVEtQSzswNidAVGIyKVJLIj0hVkxFL2lKI28zdUVwUlYncko/PDVXTVJwIUVRMV9XaGooJ1A+OSJOL2lkTUcrb3VKTEJqLS0iOigwam1GamNTT2o0T1BcYDwqZmszbSliKWIpTlZHPSMvOjVFMzEvbzQzMkk7Xkc9XDRkcStYXzk4NXRjPTEtU2Y5Z0RzW1E5MVNYND1BXm9lRElXSWk4Zm8jN3VkS0VwPG4rN2pqTnJjUmVQITBHIVI9MSRATT1bRCtPL2B1Kz9GT0Eha0NGU3I3OyYoRls8LyNBTyxsVHRmMGJxT2QlQVlDaiQ1RDVDRXJeRUhmTEp0ZDFEZnMvVjtXWmUnRnBEK11iOz0iITkjbVQsKCs+dEpfKCQucT4xbCwzQ2dhbi4wU09eYFYqVT9IYmFeM3FNXFthcmlwc1dkVHAsS1lxckJJQX4+ZW5kc3RyZWFtCmVuZG9iagoxMSAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAyMjI5Cj4+CnN0cmVhbQpHYiEjXD8kRzlmJnEvKjBXMkRpRDRsQmA+NGFBZWkkKyNeSV86KFBvOjBuVlo1U01vQzgyQkdyWU1VaUojYW0hcEZEcGxDOjxrImpVZi1JLlhmPlVxV0o0ZDtddURLdTA7PUFlOk9ZUlZQNUwnZFRQLVswa2o1Sy9KJU4jPnAxY24sJ2k7TFdHZzFRQEpVUjszKXVbSCVeWjMtcT4rMkhPO2g2Z2VlUVZgXlBOVVFxRFRnKVg8aGlyOU9dcDAuXiMqXldWIShVJGc0OnRwZ2ZhNj4xRGNnOlxtRURxckwxOi07PV1qdVNePEVTO2ddYHQsQHBNKzQySk05Mi91QG5ePlhwbXExOUc4UXNsNDBTZ3RcIlhbVFt1Y3U5T3NMaC1ydEViNVp0OGI3VHNBIURuQS1SLlJyMTplXG1AKlgvbCVtJjxfQnE/L0JrNldxO1dEXlNAbC1fImxTXV5cJUgrUkBscS8/JGtMMzs+UE02WGRcM1ohTXNlLHRTLFFFXzAjSCJKJTIxTTI7ZysiZ0ZsNmlrYTY9VzxyXSw4LzBEOFpMTEtwbFgsaGxPU0JKYSNBRXA5Im1IQm04KS10J0ltbzFCbSlZP2QuRFZfZ1NAMGZkPCY3alpwMTFwVFs9RiY1Wkg5Z1gmRD5eWDhUdTFcNzIxI0ExQVRnLDZcPykiOVlPUSYhRXAyMmg0dSIsdWwwZm1TSSdRRyY7ZF1fI25XZF8wbi5oQUsqT2dRLGpENF89M18hIzAqNmY9XnI8WWtIZkoiV0pIWzoxLilCbyQhL2AkJyFeRSZnOjxgPi90OEVUIylTWGRVUms4Ozh1cE1ATTUpaCgibiI/QlN1SlYpTVQkczokXlFUdVpQLiolWCs0LmtSKVtVT1phWVYkI0E7QTclYi1Ha0YpdSRsPEtwTW03VC1jLjkrZE5KKlk3XjQxczgiTDRlIjtFQkA/OFMuM0dyKj8sZDgrU0JTS2dQM05ZRj1SclBJNHNhMVFfblAqW0s1TGUkSE0oI1xXJk1oNlpvYThZJihrMllaMS9JRi9QS15ZYz1dY0tNMF1UI0VpRmJUOG9YXzpYaF9YMF8yRGxOZDFfRXFiR3EjNWZhNXEtWFtEOkxMQDtUVWo5O0FZPzlAWUdYbVVbIUxDOUJtSktNVVNeXDk/IXA5L0RTckdZKnBJdVluP3EnZEI3XiReZGAvVUc6Jj9kSENZKDgiQEtERF48RVZmXzFrbDdAISc7Skw8JDAqalVdSHE3ck1WWXNdWV8jPydJXlBnZnIrNmZBb1E5R3RKWFU6OyhJPiQjcE0oN1MkRTpmW2wqUSk0OXAyK1c3RCgoUk5CREhhM2hqOCVgK0VfS2UqbV9jU2graGtQcl1FamU8N0QoSW9fbGdmSGFyPFZzOCUxdW1eVSFpXDReUFUoPlZbPVZVKE9JayJkMixdRD1IRl0hPixPZ1JNcFQ6RExIaEU5blRhO2k2Rz5ORGkpNSsoL3AkLSsoaWpNT1haQlVdKzstSWdEVkhrO2M2cjtqaVg1UFR0ZDxBJElVS21PJkVsbVY1Q0s3VSpQX3IqaW9KWkhraklkJiZCYTtdWy82S2hhS2JfLG4oL1FpJEleYyhyP2tOUkc5bkdjUFlBOCw7Sm0sJFMwOUhMZCFNJTVENlk5XUtzKl5Hc0lyaSZPdWUqYEtYMFldQmwpSWYzUFQySilGNFdsLHBAOCRhRycuVUY+VUdjJTtVLTFWP1lNb0RHRmVcbEArY2xaPVAuNWFZPmE9X2hpSyxBI21PW0kxcWdFXHVMT28uQWswOTlKa21LOF1VaSNZcklFTklPb2hOX1NQNEBBRlRTTFlcNG9vbU1pKHJePSZLXTxERkVFIWlSVGgzKyE3ZUksNWV0UT5sY1ZtbExmb2VbVCo4SlVeVlpDY3FrYjtNRUddazJTR0dnJzxwWkhiWlEtSWNkJEREMXUiYSE2ZztpUVlJMERIP2RZWz0jUSZwaT5bO0AjZFI6aEAzKVtHJzE5JjAiPmdKOWYqYEpuJ1ZpQGJiPFgqRTpoSy8mY1B1WDA7O15gQSZwJmA4ci50TXEsdElkWVBraSYnSmFHYmxAZnUpb3FBKG43QDRuSi1qOWYnOk4mS25EQktfNFwucE04YjFpQD0hJy82X0FSNU82OmxKKyIsP0UnbjNGVTRZQUZIcydyYzNqNW8rMT5fRk4pcVpWb1I5V04iKkImcE4wLEVlZjU1UGg9VFZEb01dRylKaFgjS3RCJXJndWNYcCloKk1bKyVRQyxPOVloJVUtSEJVJWtANUs3YDgycTsiM2M7Ml5ROyRvYU51UCs2NFFXVCxlRWxgc05yQi06PC91TUtKUU4qL2wzXF9hdCFyUG5VU1hGT29bQj9uZTUscSYnZ3BGZT4jJ25Ub00qXUQ8cUxma0UlRmhYJW1mbjMxPzpnNTovW0gmY2xFQDNoaV9fLmdOaWEwXlh1aSltXF9BbVQ/MVhPYiVRaGU+SFo3U2huWjRldCZMTUwhS1dZb2I2TyZiITpyai9xYCxlOUVwKlw3MGQ/KzU6OGkqYiVZX1xZTm5VTV5sRls5LixPJSJkJFVnIkw1UmRiclloPSJHMWpCWjxOT3NGWSgoOEBzPF1uZyhrKiQzKGtEXFQyQ1E2a2dXQURgM3RsKDlVPm5kTylBbFJyWzlXSydNcEY0JDFeIjxGcT0kNV5DTUViSGMsP1VJbmVzbUJQPD1eI28sUGNbXzBvY0VWcChcaCpfJ1hMPy8iSmxiUWZjP2A4cTZTQU9oJkVDcGpwKCouSFRcQSRCXFFoMzVFP2lIUFUtak1DdWgmZXRIJCosM11nQjZDRS0rVjlYOTFPYjJWUiJRJW8mKCxpPTJFVS4qODQtdCtNSlJMcEUpJnRbLS9iK3ElbVAhUlpYaktZW0gxV2lWV1JWViVlSm9nVG51NE45cEI7UFlHZmohRWohWXAmfj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxMgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNjEgMDAwMDAgbiAKMDAwMDAwMDExMiAwMDAwMCBuIAowMDAwMDAwMjE5IDAwMDAwIG4gCjAwMDAwMDAzMzEgMDAwMDAgbiAKMDAwMDAwMDQ0NiAwMDAwMCBuIAowMDAwMDAwNjUwIDAwMDAwIG4gCjAwMDAwMDA4NTQgMDAwMDAgbiAKMDAwMDAwMDkyMiAwMDAwMCBuIAowMDAwMDAxMjEzIDAwMDAwIG4gCjAwMDAwMDEyNzggMDAwMDAgbiAKMDAwMDAwMzk5MiAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9JRCAKWzwzYTRiYmJhMzdhZDhjODE5OGM3MzViNzZhNGRiOGQ4Yj48M2E0YmJiYTM3YWQ4YzgxOThjNzM1Yjc2YTRkYjhkOGI+XQolIFJlcG9ydExhYiBnZW5lcmF0ZWQgUERGIGRvY3VtZW50IC0tIGRpZ2VzdCAob3BlbnNvdXJjZSkKCi9JbmZvIDggMCBSCi9Sb290IDcgMCBSCi9TaXplIDEyCj4+CnN0YXJ0eHJlZgo2MzEzCiUlRU9GCg==";
+  function cvUrl() {
+    var bin = atob(CV_BASE64);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return URL.createObjectURL(new Blob([bytes], { type: "application/pdf" }));
+  }
+  var url = cvUrl();
+  document.querySelectorAll(".js-cv").forEach(function (a) { a.setAttribute("href", url); });
+
+  /* ---- Footer year ---- */
+  document.getElementById("year").textContent = String(new Date().getFullYear());
+})();
+</script>
+</body>
+</html>
